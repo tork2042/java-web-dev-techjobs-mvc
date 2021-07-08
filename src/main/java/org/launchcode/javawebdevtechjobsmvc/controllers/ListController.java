@@ -1,6 +1,7 @@
 package org.launchcode.javawebdevtechjobsmvc.controllers;
 
 import org.launchcode.javawebdevtechjobsmvc.models.Job;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +50,9 @@ public class ListController {
     @RequestMapping(value = "jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         ArrayList<Job> jobs;
+
         if (column.toLowerCase().equals("all")){
             jobs = JobData.findAll();
-            model.addAttribute("title", "All Jobs");
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
